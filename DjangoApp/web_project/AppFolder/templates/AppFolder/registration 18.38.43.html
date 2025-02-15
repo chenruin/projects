@@ -1,0 +1,122 @@
+<!-- registration.html -->
+
+<style>
+    /* Add your CSS styles here to style the product detail page */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .user-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+
+    .user-menu li {
+        margin-right: 10px;
+    }
+
+    .user-menu a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .cart-button {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .product-details {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        max-width: 100%;
+    }
+
+    .product-title {
+        font-weight: bold;
+    }
+
+    .product-description {
+        margin-top: 10px;
+    }
+
+    .product-price {
+        color: #007BFF;
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    .quantity-label {
+        font-weight: bold;
+    }
+
+    .add-to-cart-button {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .quantity-select {
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>BLOOMS</h1>
+    <ul class="user-menu">
+        <li><a href="{% url 'login' %}">LOGIN</a></li>
+        <li><a href="{% url 'register' %}">JOIN</a></li>
+        <li><a href="{% url 'cart' %}" class="cart-button">CART</a></li>
+    </ul>
+</header>
+<div class="category-tabs">
+    <a class="category-tab" href="{% url 'main' %}">All Flower</a>
+    <a class="category-tab" href="{% url 'bouquet' %}">Bouquet</a>
+    <a class="category-tab" href="{% url 'article' %}">Flower Care Tips</a>
+</div>
+
+<div class="registration-container">
+    <h2>New User Registration</h2>
+    <form method="post" action = {% url "register" %}>
+        {% csrf_token %}
+        {{ registration_form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+</div>
