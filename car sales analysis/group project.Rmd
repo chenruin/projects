@@ -1,0 +1,78 @@
+---
+title: "Untitled"
+author: "chenrui niu"
+date: "2022-11-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+cars_hw<-read.csv("/Users/chenrui/Downloads/archive/cars_raw.csv")
+glimpse(cars_hw)
+View(cars_hw)
+```
+
+```{r}
+#most popular make in each state
+cars_hw %>% 
+  group_by(State, Make) %>% 
+  summarise(total = n()) %>% 
+  top_n(1, total)
+
+#most popular model in each state
+cars_hw %>% 
+  group_by(State, Model) %>% 
+  summarise(total = n()) %>% 
+  top_n(1, total)
+
+#What Make is most popular in general
+cars_hw %>% 
+  group_by(Make) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n))
+  
+cars_hw %>% 
+  group_by(State) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n))
+
+
+cars_hw %>%
+  filter(State == "FL") %>% 
+  group_by(Make) %>% 
+  summarise(n = n()) %>% 
+  top_n(10, n) %>% 
+  ggplot(aes(x = reorder(Make, -n), y = n)) + geom_col()
+
+cars_hw %>%
+  group_by(Make) %>% 
+  summarise(n = n()) %>% 
+  top_n(10, n) %>% 
+  ggplot(aes(x = reorder(Make, -n), y = n)) + geom_col()
+
+cars_hw %>% 
+  group_by(State, Make) %>% 
+  summarise(total = n()) %>% 
+  top_n(1, total)
+
+
+```
+
+2
+
+```{r}
+cars_hw %>% 
+  filter(Make == "BMW") %>% 
+  ggplot(aes(x = Make, y = ConsumerRating)) + geom_boxplot()
+
+
+
+cars_hw %>% 
+  group_by(Make) %>% 
+  mutate(mean = mean(ConsumerRating)) %>% 
+  ggplot(aes(x = ConsumerReviews, y = mean, color = factor(Make))) + geom_jitter()
+```
